@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+{% if category_posts %}
+
+    <h1>{{ cats }}...</h1><hr> <br>
+
+    
+        {% for post in category_posts %}
+
+         
+        {% if post.author.profile.profile_pic %}
+            <img src="{{post.author.profile.profile_pic.url}}" class="card-img rounded-circle" alt="..." width="45" height="45">
+        {% else %}
+            <img src="{% static 'theblog/images/user.png' %}" class="card-img rounded-circle" alt="..." width="45" height="45">
+        {% endif %}
+
+
+
+        <a href="{% url 'article-detail' post.pk %}">{{post.title}} </a> - {{post.author.first_name}}
+            {{post.author.last_name}} 
+            {% if user.is_authenticated %}
+            -<small> <a href="{% url 'update_post' post.pk %}">Edit</a>
+                <a href="{% url 'delete_post' post.pk %}">Delete</a></small>
+
+            <br><br>
+            {% endif %}
+            {{post.body | slice:":600"|safe}}... 
+        
+        <br> <br><br>
+        {% endfor %}
+    
+
+{% else %}
+    
+    <h1>No posts to show..</h1>
+
+{% endif %}
+
+
+{% endblock %}

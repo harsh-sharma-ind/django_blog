@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+
+
+
+<div class="card mb-3"><br>
+    <div class="row no-gutters">
+      <div class="col-md-2">
+      {% if page_user.profile_pic %}
+        <img src="{{page_user.profile_pic.url}}" class="card-img rounded-circle" alt="..." width="100" height="100">
+       {% else %}
+        <img src="{% static 'theblog/images/user.png' %}" class="card-img rounded-circle" alt="..." width="100" height="100">
+       {% endif %}
+      </div>
+      <div class="col-md-10">
+        <div class="card-body">
+          <h5 class="card-title">{{page_user.user.first_name}} {{page_user.user.last_name}}</h5>
+          <p class="small text-muted">
+              
+              {% if page_user.website_url %}
+               <a href="{{page_user.website_url}}"><img src="{% static 'theblog/images/linkedin.webp' %}" class="card-img rounded-circle" alt="..." width="25" height="25"></a> 
+              {% endif %}
+              {% if page_user.facebook_url %}
+                 <a href="{{page_user.facebook_url}}"><img src="{% static 'theblog/images/facebook.webp' %}" class="card-img rounded-circle" alt="..." width="25" height="25"></a> 
+              {% endif %}
+              {% if page_user.instagram_url %}
+                 <a href="{page_user.instagram_url}}"><img src="{% static 'theblog/images/insta.png' %}" class="card-img rounded-circle" alt="..." width="25" height="25"></a> 
+              {% endif %}
+              {% if page_user.twitter_url %}
+                 <a href="{page_user.twitter_url}}"><img src="{% static 'theblog/images/twitter.png' %}" class="card-img rounded-circle" alt="..." width="25" height="25"></a> 
+              {% endif %}
+              {% if  page_user.pinterest_url %}
+              
+                 <a href="{{ page_user.pinterest_url}}"><img src="{% static 'theblog/images/pinterest.jpg' %}" class="card-img rounded-circle" alt="..." width="25" height="25"></a> 
+              {% endif %}
+              
+          </p>
+          <p class="card-text">{{ page_user.bio}}</p>
+          
+        </div>
+      </div>
+    </div><br>
+  </div>
+
+
+{% endblock %}

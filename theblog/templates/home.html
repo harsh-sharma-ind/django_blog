@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+
+
+    {% for post in object_list %}
+
+        {% if post.author.profile.profile_pic %}
+            <img src="{{post.author.profile.profile_pic.url}}" class="card-img rounded-circle" alt="..." width="45" height="45">
+        {% else %}
+            <img src="{% static 'theblog/images/user.png' %}" class="card-img rounded-circle" alt="..." width="45" height="45">
+        {% endif %}
+
+        <a href="{% url 'article-detail' post.pk %}">{{post.title}} - <a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a></a> - {{post.author.first_name}}
+            {{post.author.last_name}} - {{post.post_date}}
+            {% if user.is_authenticated %}
+                {% if user.id == post.author.id %}
+                -<small> <a href="{% url 'update_post' post.pk %}">Edit</a>
+                    <a href="{% url 'delete_post' post.pk %}">Delete</a></small>
+
+                
+                {% endif %}
+            {% endif %} <br><br>
+            <small>{{post.snippet}}</small>
+            
+        
+        <br><br><br>
+    {% endfor %}
+
+
+{% endblock %}
